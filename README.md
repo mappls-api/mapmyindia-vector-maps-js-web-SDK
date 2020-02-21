@@ -57,7 +57,7 @@ Define `<!DOCTYPE html>` on top of your HTML.
    
 ```html
     <style> html, body, #map1 {margin: 0;padding: 0;width: 100%;height: 100%;} </style>
- ```
+```
 
 - Define a div object in the body tag of the HTML where you want the MapmyIndia Map to show up
 
