@@ -43,9 +43,11 @@ Follow the below steps to integrate MapmyIndia interactive Maps into your existi
 - Declare application as HTML5:
 Define `<!DOCTYPE html>` on top of your HTML.
 - Integrate Interactive maps from MapmyIndia into your browser application by simply including MapmyIndia's interactive map API in your script source in the head section.
+
 ```html
     <script src="https://apis.mapmyindia.com/advancedmaps/api/<key or token>/map_sdk?v=2.0&layer=vector"></script>
 ```
+
     **Important**: 
 
     - *bearer token* in place of `<key>`
@@ -57,7 +59,7 @@ Define `<!DOCTYPE html>` on top of your HTML.
     <style> html, body, #map1 {margin: 0;padding: 0;width: 100%;height: 100%;} </style>
  ```
 
-- Define a div object in the body tag of the HTML where you want the MapmyIndia Map to show up.
+- Define a div object in the body tag of the HTML where you want the MapmyIndia Map to show up
 
 ```html
     <div id="map"></div>;
