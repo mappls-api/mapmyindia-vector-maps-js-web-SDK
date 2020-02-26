@@ -1,0 +1,269 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        
+        <script src="https://apis.mapmyindia.com/advancedmaps/api/<Token or Key>/map_sdk?layer=raster&v=2.0&callback=initMap1" defer async></script>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+
+        </title>
+        <style>
+            #main{
+                width: 100%;
+                height: 100%;
+                background-color: gray;
+            }
+            #left-menu{
+                width: 230px;
+                height: 100%;
+                background-color:  #e0e0e0;
+                float: left;
+                overflow: auto;
+            }
+            #right-menu{
+                width: calc(100% - 230px);
+                height: 100vh;
+                float: left;
+            }
+            /* Switch checkbox */
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 55px;
+                height: 28px;
+            }
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 20px;
+                width: 20px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+            input:checked+.slider {
+                background-color: #2196F3;
+            }
+
+            input:focus+.slider {
+                box-shadow: 0 0 1px #2196F3;
+            }
+
+            input:checked+.slider:before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(26px);
+            }
+
+            /* Rounded sliders */
+            .slider.round {
+                border-radius: 34px;
+            }
+            .slider.round:before {
+                border-radius: 50%;
+            }
+
+            @media only screen and (max-width: 600px) {
+                #left-menu {
+                    -webkit-transition: height 0.2s;
+                    transition: height 0.2s;
+                    width: 100%;
+                    height: 30%;
+                    background-color:  #e0e0e0;
+                    position: absolute;
+                    bottom: 0%;
+                    z-index: 2;
+                    overflow: auto;
+                }
+                #right-menu{
+                    width: 100%;
+                    height: 70%;
+                    position: absolute;
+                    z-index: 1;
+                }
+                
+            }
+
+            #flip1
+            {
+                color: #3c3c3c;
+                font-size: 20px;
+                background-color: #f3f3f3;
+                padding: 6px 0px;
+                margin-bottom: 3px;
+                margin-left: 6px;
+                margin-right: 6px;
+                border-radius: 6px;	
+            
+            }
+            #panel1{
+                padding:5px 10px 0px;
+                display: block;
+            }
+
+            ::-webkit-scrollbar {
+            width: 5px;
+            display: none;
+            }
+            .b-shadow {
+                /* -webkit-box-shadow: 0 8px 6px -6px gray;
+                -moz-box-shadow: 0 8px 6px -6px gray;
+                box-shadow: 0 8px 6px -6px gray; */
+                -moz-box-shadow:    inset 0 0 5px lightgray;
+                -webkit-box-shadow: inset 0 0 5px lightgray;
+                box-shadow:         inset 0 0 5px lightgray;
+                /* width:80%; */
+                height:25px;
+                line-height: 25px;
+                padding:2px;
+                font-size: 12px;
+                margin-bottom: 4px;
+
+            }
+            .texlable{
+                font-size:13px;
+
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="main">
+            <section id="left-menu">
+            <center><h4> Map AddGeoJson</h4></center>
+                <!-- Draw PolyLine -->
+                <div id="flip1">
+                    <div id="panel1">
+                        
+                        <span class="texlable">Overlap</span>
+                        <select name="label" id="overlap" class="form-control b-shadow">
+                            <option disabled>Select</option>
+                            <option value="true" selected>True</option>
+                            <option value="false">False</option>
+                        </select> 
+                        <span class="texlable">Fitbounds</span>
+                        <select name="label" id="fitbounds" class="form-control b-shadow">
+                            <option disabled>Select</option>
+                            <option value="true" selected>True</option>
+                            <option value="false">False</option>
+                        </select>
+                        <span class="texlable">Mixjson</span>
+                        <textarea name="label" id="mixjson" rows="5" class="form-control">
+                        {
+                          "id":"bm",
+                          "type": "FeatureCollection",
+                          "features": [{
+                            "type": "Feature",
+                            "properties": {"icon":"to.png", "icon-size":0.35, "icon-offset":[0,-20]},
+                            "geometry": {"type": "Point",
+                            "coordinates": [27.024695711685304,76.324462890625]}
+                            },{
+                            "type": "Feature",
+                            "properties": {"icon":"to.png", "icon-size":0.35, "icon-offset":[0,-20]},
+                            "geometry": {"type": "Point",
+                            "coordinates": [28.97189158,77.2158203125]}
+                            },{
+                            "type": "Feature",
+                            "properties": {"icon":"to.png", "icon-size":0.35, "icon-offset":[0,-20]},
+                            "geometry": {"type": "Point",
+                            "coordinates": [28.27389158,77.2258203125]}
+                          }]
+                        }
+  
+                        </textarea>
+                        <span class="texlable">CType=0 (default(lat,lng)) <br> CType=1 (set(lng,lat))</span>
+                        <select name="ctype" id="ctype" class="form-control b-shadow">
+                            <option disabled>Select</option>
+                            <option value="0" selected>0</option>
+                            <option value="1" >1</option>
+                        </select>
+                        <div id="ch14" style="width:30%; height:40px;  display: inline-block; margin-top: 2%;">
+                            <label class="switch">
+                                <input id="checkbox" type="checkbox" Unchecked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            <!-- <hr> -->
+            </section>
+            <section id="right-menu"></section>
+        </div>
+
+        <!-- All Globle veriables -->
+        <script>
+            var map1;
+            var center = "28.5507160000001,77.2689280000001";
+            var center = center.split(",");
+            var lat = center[0];var lng=center[1];
+            var mix;
+
+            // Addgeojson
+            document.getElementById('checkbox').addEventListener('change', (event) => {
+                if (event.target.checked) {
+                    // call Addgeojson
+                    addgeojson();
+                } 
+                else {
+                    map1.setZoom(4);
+                    MapmyIndia.remove({map:map1,layer:mix});
+                    map1.setCenter({lat: lat, lng: lng});
+                    // mix=null;
+                }
+            });
+
+            // Map Function
+            function initMap1() {
+                var center = {lat: lat, lng: lng};
+                map1 = new MapmyIndia.Map(document.getElementById('right-menu'), 
+                {
+                    center: center,
+                    zoomControl: true,
+                    location: true,
+                });
+            }
+
+            // Addgeojson function
+            function addgeojson(){
+                var overlap=  document.getElementById('overlap').value;
+                var mixjson=  document.getElementById('mixjson').value;
+                var ctype =  document.getElementById('ctype').value;
+                var fitbounds= document.getElementById('fitbounds').value;
+
+                mix=MapmyIndia.addGeoJson({
+                    map:map1,data:JSON.parse(mixjson),
+                    cType:JSON.parse(ctype),
+                    overlap:JSON.parse(overlap),
+                    preserveViewport:JSON.parse(fitbounds),
+                    callback:mmi   // call back function
+                });
+
+                // call back function for partikular marker
+                function mmi(e){
+                  console.log(e);
+                }
+            }
+        </script>
+    </body>
+</html>

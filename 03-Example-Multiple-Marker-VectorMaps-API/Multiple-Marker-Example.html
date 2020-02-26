@@ -1,0 +1,299 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        
+        <script src="https://apis.mapmyindia.com/advancedmaps/api/<Token or Key>/map_sdk?layer=vector&v=2.0&callback=initMap1" defer async></script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+
+        </title>
+        <style>
+            .a{
+                position: absolute;
+                left:14px;
+                top:8px;
+            }
+            #main{
+                width: 100%;
+                height: 100%;
+                background-color: gray;
+            }
+            #left-menu{
+                width: 230px;
+                height: 100%;
+                background-color:  #e0e0e0;
+                float: left;
+                overflow: auto;
+            }
+            #right-menu{
+                width: calc(100% - 230px);
+                height: 100vh;
+                float: left;
+            }
+            /* Switch checkbox */
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 55px;
+                height: 28px;
+            }
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 20px;
+                width: 20px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+            input:checked+.slider {
+                background-color: #2196F3;
+            }
+
+            input:focus+.slider {
+                box-shadow: 0 0 1px #2196F3;
+            }
+
+            input:checked+.slider:before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(26px);
+            }
+
+            /* Rounded sliders */
+            .slider.round {
+                border-radius: 34px;
+            }
+            .slider.round:before {
+                border-radius: 50%;
+            }
+
+            @media only screen and (max-width: 600px) {
+                #left-menu {
+                    -webkit-transition: height 0.2s;
+                    transition: height 0.2s;
+                    width: 100%;
+                    height: 30%;
+                    background-color:  #e0e0e0;
+                    position: absolute;
+                    bottom: 0%;
+                    z-index: 2;
+                    overflow: auto;
+                }
+                #right-menu{
+                    width: 100%;
+                    height: 70%;
+                    position: absolute;
+                    z-index: 1;
+                }
+                
+            }
+
+            #flip1
+            {
+                color: #3c3c3c;
+                font-size: 20px;
+                background-color: #f3f3f3;
+                padding: 6px 0px;
+                margin-bottom: 3px;
+                margin-left: 6px;
+                margin-right: 6px;
+                border-radius: 6px;	
+            
+            }
+            #panel1{
+                padding:5px 10px 0px;
+                display: block;
+            }
+
+            ::-webkit-scrollbar {
+            width: 5px;
+            display: none;
+            }
+            .b-shadow {
+                -moz-box-shadow:    inset 0 0 5px lightgray;
+                -webkit-box-shadow: inset 0 0 5px lightgray;
+                box-shadow:         inset 0 0 5px lightgray;
+                /* width:80%; */
+                height:25px;
+                line-height: 25px;
+                padding:2px;
+                font-size: 12px;
+                margin-bottom: 4px;
+
+            }
+            .texlable{
+                font-size:13px;
+            }.a{color: #000;}
+        </style>
+    </head>
+    <body>
+        <div id="main">
+            <section id="left-menu">
+                <center><h4>Map Multiple Markers</h4></center>
+                <div id="flip1">
+                    <div id="panel1">
+                        <span class="texlable">clusters</span>
+                        <select name="label" id="clusters" class="form-control b-shadow">
+                            <option disabled>Select</option>
+                            <option value="true">True</option>
+                            <option value="false" selected>False</option>
+                        </select>
+                        <span class="texlable">clustersOptions</span>
+                        <input type="text" id="clustersoptions" value='{"color": "blue","bgcolor":"red"}' placeholder="Enter clustersoptions" class="form-control b-shadow">
+                        <span class="texlable">fitbounds</span>
+                        <select name="label" id="fitbounds1" class="form-control b-shadow">
+                            <option disabled>Select</option>
+                            <option value="true" selected>True</option>
+                            <option value="false">False</option>
+                        </select>
+                        <span class="texlable">Icon_url</span>
+                        <input type="text" id="icon_url" value="https://apis.mapmyindia.com/map_v3/1.png" placeholder="Enter icon" class="form-control b-shadow">
+                        <span class="texlable">Position</span>
+                        <textarea name="label" id="geojson" rows="10" class="form-control b-shadow">
+                            {
+                                "id":"bm",
+                                "type": "FeatureCollection",
+                                "features": [{
+                                        "type": "Feature",
+                                        "properties": {"htmlPopup":"there is MapmyIndia1",
+                                        "html":"<span ' class='a'>1</span>",
+                                        "message": "Foo","iconSize": [60, 60]},
+                                        "geometry": {"type": "Point",
+                                        "coordinates": [27.024695711685304,76.324462890625]}
+                                    },{
+                                        "type": "Feature",
+                                        "properties": {"htmlPopup":"there is MapmyIndia2",
+                                        "html":"<span class='a'>2</span>",
+                                        "iconSize": [50, 50]},
+                                        "geometry": {"type": "Point",
+                                        "coordinates": [28.97189158,77.2158203125]}
+                                    },{
+                                        "type": "Feature",
+                                        "properties": {"htmlPopup":"there is MapmyIndia3",
+                                        "html":"<span class='a'>3</span>",
+                                        "iconSize": [50, 50]},
+                                        "geometry": {"type": "Point",
+                                        "coordinates": [28.27389158,77.2258203125]}
+                                    }
+                                ]
+                            }
+                        </textarea>
+                        <span class="texlable">CType=0 (default(lat,lng)) <br> CType=1 (set(lng,lat))</span>
+                        <select name="ctype" id="ctype" class="form-control b-shadow">
+                            <option disabled>Select</option>
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option>
+                        </select>
+                        <div id="ch13" style="width:30%; height:40px;  display: inline-block; margin-top: 2%;">
+                            <label class="switch">
+                                <input id="checkbox" type="checkbox" Unchecked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <hr style="height: 1px; background-color: gray;" />
+                        <h4>Multple Marker using Single Marker</h4>
+                        <div id="ch14" style="width:30%; height:40px;  display: inline-block; margin-top: 2%;">
+                            <label class="switch">
+                                <input id="checkbox1" type="checkbox" Unchecked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- <hr> -->
+            </section>
+            <section id="right-menu"></section>
+        </div>
+
+        <!-- All Globle veriables -->
+    <script>
+            var map1;
+            var Marker2;
+            var mkr=[];
+            var center = "28.5507160000001,77.2689280000001";
+            var center = center.split(",");
+            var lat = center[0];var lng=center[1];
+
+            // multiple marker
+            document.getElementById('checkbox').addEventListener('change', (event) => {
+                if (event.target.checked) { 
+                    // mutiple marker call
+                    multi_marker();
+                }   
+                else{
+                    MapmyIndia.remove({map:map1,layer:Marker2});
+                    map1.setZoom(4);
+                    map1.setCenter({lat: lat, lng: lng});
+                }
+            });
+
+            // multiple marker
+            document.getElementById('checkbox1').addEventListener('change', (event) => {
+                if (event.target.checked) { 
+                    mkr[0]= new MapmyIndia.Marker({map:map1,position:{lat: 28.519467, lng: 77.223150},fitbounds:false,icon:'https://maps.mapmyindia.com/images/to.png',width:"35px",height:"35px",html:'<div style="white-space:nowrap;font-size:10px;padding-left:15px;color:#fff">BM</div>',popupOptions:{"openPopup":true},popupHtml:'<div id="data">balmukand</div>',draggable:false});
+
+                    mkr[1]= new MapmyIndia.addMarker({map:map1,position:{lat: 28.569467, lng: 77.273150},fitbounds:false,icon:'https://maps.mapmyindia.com/images/to.png',width:"35px",height:"35px",html:'<div style="white-space:nowrap;font-size:10px;padding-left:15px;color:#fff">BM</div>',popupOptions:{"openPopup":true},popupHtml:'<div id="data">balmukand</div>',draggable:false});
+                }   
+                else{
+                    MapmyIndia.remove({map:map1,layer:mkr});
+                }
+            });
+
+            // Map Function
+            function initMap1() {
+                var center = {lat: lat, lng: lng};
+                map1 = new MapmyIndia.Map(document.getElementById('right-menu'), 
+                {
+                    center: center,
+                    zoomControl: true,
+                    location: true,
+                });
+            }
+
+            // multiple marker function
+            function multi_marker(){
+                var clusters = document.getElementById('clusters').value;
+                var geojson = document.getElementById('geojson').value;
+                var fitbounds1= document.getElementById('fitbounds1').value;
+                var icon_url = document.getElementById('icon_url').value;
+                var clustersoptions = document.getElementById('clustersoptions').value;
+                var ctype =  document.getElementById('ctype').value;
+
+                // multiple marker
+                Marker2 = MapmyIndia.Marker({
+                    fitbounds:fitbounds1,
+                    fitboundOptions:{padding: 120,duration:1000},
+                    map:map1,
+                    position:JSON.parse(geojson),
+                    cType:JSON.parse(ctype),
+                    clusters:clusters,
+                    clustersOptions :JSON.parse(clustersoptions),
+                    icon:icon_url
+                });
+            }
+            
+        </script>
+    </body>
+</html>

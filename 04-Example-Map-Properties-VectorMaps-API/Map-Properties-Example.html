@@ -1,0 +1,473 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://apis.mapmyindia.com/advancedmaps/api/<Token or Key>/map_sdk?layer=vector&v=2.0&callback=initMap1" defer async></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>
+        </title>
+        <style>
+        #main{
+            width: 100%;
+            height: 100%;
+            background-color: gray;
+        }
+        #left-menu{
+            width: 230px;
+            height: 100%;
+            background-color:  #e0e0e0;
+            float: left;
+            overflow: auto;
+        }
+        #right-menu{
+            width: calc(100% - 230px);
+            height: 100vh;
+            float: left;
+        }
+        /* Switch checkbox */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 55px;
+            height: 28px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+        #down1,#down2,#down3,#down4,#down5,#down6,#down7{
+            cursor: pointer;
+        }
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        @media only screen and (max-width: 600px) {
+            #left-menu {
+                -webkit-transition: height 0.2s;
+                transition: height 0.2s;
+                width: 100%;
+                height: 30%;
+                background-color:  #e0e0e0;
+                position: absolute;
+                bottom: 0%;
+                z-index: 2;
+                overflow: auto;
+            }
+            #right-menu{
+                width: 100%;
+                height: 70%;
+                position: absolute;
+                z-index: 1;
+            }
+            #l1,#cl1{
+                display:none;
+            }
+            
+        }
+
+        #flip1
+        {
+            color: #3c3c3c;
+            font-size: 20px;
+            background-color: #f3f3f3;
+            padding: 6px 0px;
+            margin-bottom: 3px;
+            margin-left: 6px;
+            margin-right: 6px;
+            border-radius: 6px;	
+        
+        }
+        #panel1{
+            padding:5px 10px 0px;
+            display: block;
+        }
+
+        ::-webkit-scrollbar {
+        width: 5px;
+        display: none;
+        }
+        .b-shadow {
+            -moz-box-shadow:    inset 0 0 5px lightgray;
+            -webkit-box-shadow: inset 0 0 5px lightgray;
+            box-shadow:         inset 0 0 5px lightgray;
+            /* width:80%; */
+            height:20px;
+            line-height: 20px;
+            padding:2px;
+            font-size: 12px;
+            margin-bottom: 4px;
+
+        }
+        .texlable{
+            font-size:13px;
+
+        }
+        #l1{
+            position: relative;top: -0px;left: 20px;
+        }
+
+
+        </style>
+    </head>
+    <body>
+        <div id="main">
+            <section id="left-menu">
+                    <center><h4>Map Properties</h4></center>
+                    <div id="flip1">
+                            <div id="panel1" style="height: auto; overflow: auto;">
+                                <span class="texlable">MinZoom</span>
+                                <input type="text" id="label7" value="3" placeholder="Enter minZoom" class="form-control b-shadow">
+                                <span class="texlable">MaxZoom</span>
+                                <input type="text" id="label8" value="22" placeholder="Enter MaxZoom" class="form-control b-shadow">
+            
+                                <span class="texlable">Center</span>
+                                <input type="text" id="label9" value="28.5507160000001,77.2689280000001" placeholder="Enter Latitude" class="form-control b-shadow">
+                                <span style="font-size:15px;">Zoom</span>
+                                <input type="text" id="label10" value="3" placeholder="Enter Zoom" class="form-control b-shadow">
+                                <span style="font-size:15px;">Heading</span>
+                                <input type="text" id="label12" value="0" placeholder="Enter Heading" class="form-control b-shadow">
+                                <span class="texlable">Tilt</span>
+                                <input type="text" id="label13" value="0" placeholder="Enter Tilt" class="form-control b-shadow">
+                                <div style="width:30%; height:40px;  display: inline-block; margin-top: 2%;">
+                                    <label class="switch">
+                                        <input id="checkbox" type="checkbox" Unchecked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div><br>
+                                <span class="texlable">BackgroundColor</span>
+                                <select name="label" id="label1" class="form-control b-shadow">
+                                    <option disabled>Select</option>
+                                    <option value="white" selected>white</option>
+                                    <option value="gray" >Gray</option>
+                                    <option value="black">Black</option>
+                                </select>
+                                <span class="texlable">DisableDoubleClickZoom</span>
+                                <select name="label" id="label2" class="form-control b-shadow">
+                                    <option disabled>Select</option>
+                                    <option value="true">True</option>
+                                    <option value="false" selected>False</option>
+                                </select>
+
+                                <span class="texlable">Setellite</span>
+                                <select name="label" id="setellite" class="form-control b-shadow">
+                                    <option disabled>Select</option>
+                                    <option value="true">True</option>
+                                    <option value="false" selected>False</option>
+                                </select>
+                                <span class="texlable">traffic</span>
+                                <select name="label" id="traffic" class="form-control b-shadow">
+                                    <option disabled>Select</option>
+                                    <option value="true" selected>True</option>
+                                    <option value="false" >False</option>
+                                </select>
+
+                                <span class="texlable">ZoomControl</span>
+                                <select name="label" id="label3" class="form-control b-shadow">
+                                    <option disabled>Select</option>
+                                    <option value="true" selected>True</option>
+                                    <option value="false">False</option>
+                                </select>
+                                <span class="texlable">zoomControlOptions</span>
+                                <select name="label" id="label15" class="form-control b-shadow">
+                                    <option disabled>Select</option>
+                                    <option value="TOP_CENTER" >TOP_CENTER</option>
+                                    <option value="TOP_LEFT" >TOP_LEFT</option>
+                                    <option value="TOP_RIGHT" >TOP_RIGHT</option>
+                                    <option value="LEFT_TOP" >LEFT_TOP</option>
+                                    <option value="RIGHT_TOP" >RIGHT_TOP</option>
+                                    <option value="LEFT_CENTER" >LEFT_CENTER</option>
+                                    <option value="RIGHT_CENTER" >RIGHT_CENTER</option>
+                                    <option value="LEFT_BOTTOM" >LEFT_BOTTOM</option>
+                                    <option value="RIGHT_BOTTOM" selected>RIGHT_BOTTOM</option>
+                                    <option value="BOTTOM_CENTER" >BOTTOM_CENTER</option>
+                                    <option value="BOTTOM_LEFT" >BOTTOM_LEFT</option>
+                                    <option value="BOTTOM_RIGHT" >BOTTOM_RIGHT</option>
+                                </select>
+                                <span class="texlable">FullscreenControl</span>
+                                <select name="label" id="label4" class="form-control b-shadow">
+                                    <option disabled>Select</option>
+                                    <option value="true" selected>True</option>
+                                    <option value="false">False</option>
+                                </select>
+                                <span class="texlable">FullscreenControloptions</span>
+                                <select name="label" id="fullscreencontroloptions" class="form-control b-shadow">
+                                    <option value="TOP_RIGHT" selected>TOP_RIGHT</option>
+                                    <option value="TOP_LEFT" >TOP_LEFT</option>
+                                    <option value="BOTTOM_LEFT" >BOTTOM_LEFT</option>
+                                    <option value="BOTTOM_RIGHT" >BOTTOM_RIGHT</option>
+                                </select>
+                                <span class="texlable">Geolocation</span>
+                                <select name="label" id="geolocation" class="form-control b-shadow">
+                                    <option disabled>Select</option>
+                                    <option value="true" selected>True</option>
+                                    <option value="false">False</option>
+                                </select>
+                                <span class="texlable">GeolocationOptions</span>
+                                <select name="label" id="geolocationoptions" class="form-control b-shadow">
+                                    <option disabled>Select</option>
+                                    <option value="TOP_RIGHT" selected>TOP_RIGHT</option>
+                                    <option value="TOP_LEFT" >TOP_LEFT</option>
+                                    <option value="BOTTOM_LEFT" >BOTTOM_LEFT</option>
+                                    <option value="BOTTOM_RIGHT" >BOTTOM_RIGHT</option>
+                                </select>
+                                <span class="texlable">Draggable</span>
+                                <select name="label" id="label5" class="form-control b-shadow">
+                                    <option disabled>Select</option>
+                                    <option value="true" selected>True</option>
+                                    <option value="false">False</option>
+                                </select>
+                                <span class="texlable">Scrollwheel</span>
+                                <select name="label" id="label6" class="form-control b-shadow">
+                                    <option disabled>Select</option>
+                                    <option value="true" selected>True</option>
+                                    <option value="false">False</option>
+                                </select>
+                                <span class="texlable">ScaleControl</span>
+                                <select name="label" id="label14" class="form-control b-shadow">
+                                    <option disabled>Select</option>
+                                    <option value="true" selected>True</option>
+                                    <option value="false">False</option>
+                                </select>
+                                <span class="texlable">ClickableIcons</span>
+                                <select name="label" id="label11" class="form-control b-shadow">
+                                    <option disabled>Select</option>
+                                    <option value="true" selected>True</option>
+                                    <option value="false">False</option>
+                                </select>
+                                <span class="texlable">RotateControl</span>
+                                <select name="label" id="rotateControl" class="form-control b-shadow">
+                                    <option disabled>Select</option>
+                                    <option value="true" selected>True</option>
+                                    <option value="false">False</option>
+                                </select>
+                                <span class="texlable">DisableDefaultUI</span>
+                                <select name="label" id="disableDefaultUI" class="form-control b-shadow">
+                                    <option disabled>Select</option>
+                                    <option value="true">True</option>
+                                    <option value="false" selected>False</option>
+                                </select>
+                                
+                                
+                            </div>
+                        </div>
+            </section>
+            <section id="right-menu"></section>
+        </div>
+
+        <!-- All Globle veriables -->
+    <script>
+            var backgroundColor = document.getElementById('label1').value;
+            var disableDoubleClickZoom = document.getElementById('label2').value;
+            var zoomcontrol = document.getElementById('label3').value;
+            var fullscreenControl = document.getElementById('label4').value;
+            var draggable = document.getElementById('label5').value;
+            var scrollwheel = document.getElementById('label6').value;
+            var minZoom = document.getElementById('label7').value;
+            var maxZoom = document.getElementById('label8').value;
+            var center = document.getElementById('label9').value;
+            var center = center.split(",");
+            var lat = center[0];var lng=center[1];
+            var zoom = document.getElementById('label10').value;
+            var clickableIcons = document.getElementById('label11').value;
+            var heading = document.getElementById('label12').value;
+            var tilt = document.getElementById('label13').value;
+            var scalecontrol = document.getElementById('label14').value;
+            var zoomcontroloptions = document.getElementById('label15').value;
+            var geolocation = document.getElementById('geolocation').value;
+            var geolocationoptions = document.getElementById('geolocationoptions').value;;
+            var fullscreencontroloptions = document.getElementById('fullscreencontroloptions').value;
+            var setellite = document.getElementById('setellite').value;
+            var traffic = document.getElementById('traffic').value;
+            var rotateControl = document.getElementById('rotateControl').value;
+            var disableDefaultUI = document.getElementById('disableDefaultUI').value;
+    
+    
+            // Particular Properties     
+            document.getElementById('label1').addEventListener('change', () => {
+                backgroundColor = document.getElementById("label1").value;
+                initMap1();
+            });
+            document.getElementById('label2').addEventListener('change', () => {
+                disableDoubleClickZoom = document.getElementById('label2').value;
+                initMap1();
+            });
+            document.getElementById('label3').addEventListener('change', () => {
+                zoomcontrol = document.getElementById('label3').value;
+                initMap1();
+            });
+            document.getElementById('label4').addEventListener('change', () => {
+                fullscreenControl = document.getElementById('label4').value;
+                initMap1();
+            });
+            document.getElementById('label5').addEventListener('change', () => {
+                draggable = document.getElementById('label5').value;
+                initMap1();
+            });
+            document.getElementById('label6').addEventListener('change', () => {
+                scrollwheel = document.getElementById('label6').value;
+                initMap1();
+            });
+            document.getElementById('label7').addEventListener('change', () => {
+                minZoom = document.getElementById('label7').value;
+                initMap1();
+            });
+            document.getElementById('label8').addEventListener('change', () => {
+                maxZoom= document.getElementById('label8').value;
+                initMap1();
+            });
+            document.getElementById('label9').addEventListener('change', () => {
+                center = document.getElementById('label9').value;
+                center = center.split(",");
+                lat=center[0];var lng=center[1];
+                initMap1();
+            });
+            document.getElementById('label11').addEventListener('change', () => {
+                clickableIcons= document.getElementById('label11').value;
+                initMap1();
+            });
+            document.getElementById('label12').addEventListener('change', () => {
+                heading = document.getElementById('label12').value;
+                initMap1();
+            });
+            document.getElementById('label14').addEventListener('change', () => {
+                scalecontrol = document.getElementById('label14').value;
+                initMap1();
+            });
+            document.getElementById('label15').addEventListener('change', () => {
+                zoomcontroloptions = document.getElementById('label15').value;
+                initMap1();
+            });
+            document.getElementById('geolocation').addEventListener('change', () => {
+                geolocation = document.getElementById('geolocation').value;
+                initMap1();
+            });
+            document.getElementById('geolocationoptions').addEventListener('change', () => {
+                geolocationoptions = document.getElementById('geolocationoptions').value;
+                initMap1();
+            });
+            document.getElementById('fullscreencontroloptions').addEventListener('change', () => {
+                fullscreencontroloptions = document.getElementById('fullscreencontroloptions').value;
+                initMap1();
+            });
+            document.getElementById('setellite').addEventListener('change', () => {
+                setellite = document.getElementById('setellite').value;
+                initMap1();
+            });
+            document.getElementById('traffic').addEventListener('change', () => {
+                traffic = document.getElementById('traffic').value;
+                initMap1();
+            });
+            document.getElementById('rotateControl').addEventListener('change', () => {
+                rotateControl = document.getElementById('rotateControl').value;
+                initMap1();
+            });
+            document.getElementById('disableDefaultUI').addEventListener('change', () => {
+                disableDefaultUI = document.getElementById('disableDefaultUI').value;
+                initMap1();
+            });
+
+            // Map Properties
+            document.getElementById('checkbox').addEventListener('change', (event) => {
+            minZoom = document.getElementById('label7').value;;
+            maxZoom= document.getElementById('label8').value;
+            center = document.getElementById('label9').value;
+            center = center.split(",");
+            lat=center[0];var lng=center[1];
+            zoom= document.getElementById('label10').value;
+            heading = document.getElementById('label12').value;
+            tilt = document.getElementById('label13').value;
+            if (event.target.checked) {
+                initMap1();
+                setTimeout(function(){  document.getElementById("checkbox").checked = false; }, 3000);
+            } 
+            else {
+                map1.setZoom(4);
+            }
+            });
+    
+            // Mapmyindia Map Function
+            var map1;
+                function initMap1() {
+                    var center = {lat: lat, lng: lng};
+                    map1 = new MapmyIndia.Map(document.getElementById('right-menu'), 
+                    {
+                        satellite: JSON.parse(setellite),
+                        traffic: JSON.parse(traffic),
+                        zoom: zoom = JSON.parse(zoom)-1,
+                        center: center,
+                        backgroundColor:backgroundColor,
+                        disableDoubleClickZoom:JSON.parse(disableDoubleClickZoom),
+                        zoomControl:JSON.parse(zoomcontrol),
+                        zoomControlOptions: {
+                            position:MapmyIndia.ControlPosition[zoomcontroloptions]
+                        },
+                        fullscreenControl:JSON.parse(fullscreenControl),
+                        
+                        fullscreenControlOptions: {
+                            position: fullscreencontroloptions
+                        },
+
+                        geolocation: JSON.parse(geolocation),
+                        geolocationControlOptions: {
+                            position: geolocationoptions
+                        },
+
+                        draggable:JSON.parse(draggable),
+                        scrollwheel:JSON.parse(scrollwheel),
+                        minZoom:JSON.parse(minZoom),
+                        maxZoom:JSON.parse(maxZoom),
+                        clickableIcons:JSON.parse(clickableIcons),
+                        heading:JSON.parse(heading),
+                        tilt:JSON.parse(tilt),
+                        scaleControl: JSON.parse(scalecontrol),
+                        rotateControl: JSON.parse(rotateControl),
+                        disableDefaultUI: JSON.parse(disableDefaultUI)
+                    });
+                }
+        </script>
+    </body>
+</html>

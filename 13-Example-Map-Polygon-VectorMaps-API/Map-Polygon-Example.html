@@ -1,0 +1,258 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://apis.mapmyindia.com/advancedmaps/api/<Token or Key >/map_sdk?layer=vector&v=2.0&callback=initMap1" defer async></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+
+        </title>
+        <style>
+        #main{
+            width: 100%;
+            height: 100%;
+            background-color: gray;
+        }
+        #left-menu{
+            width: 230px;
+            height: 100%;
+            background-color:  #e0e0e0;
+            float: left;
+            overflow: auto;
+        }
+        #right-menu{
+            width: calc(100% - 230px);
+            height: 100vh;
+            float: left;
+        }
+        /* Switch checkbox */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 55px;
+            height: 28px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        @media only screen and (max-width: 600px) {
+            #left-menu {
+                -webkit-transition: height 0.2s;
+                transition: height 0.2s;
+                width: 100%;
+                height: 30%;
+                background-color:  #e0e0e0;
+                position: absolute;
+                bottom: 0%;
+                z-index: 2;
+                overflow: auto;
+            }
+            #right-menu{
+                width: 100%;
+                height: 70%;
+                position: absolute;
+                z-index: 1;
+            }
+            
+        }
+
+        #flip1
+        {
+            color: #3c3c3c;
+            font-size: 20px;
+            background-color: #f3f3f3;
+            padding: 6px 0px;
+            margin-bottom: 3px;
+            margin-left: 6px;
+            margin-right: 6px;
+            border-radius: 6px;	
+        
+        }
+        #panel1{
+            padding:5px 10px 0px;
+            display: block;
+        }
+
+        ::-webkit-scrollbar {
+        width: 5px;
+        display: none;
+        }
+        .b-shadow {
+            -moz-box-shadow:    inset 0 0 5px lightgray;
+            -webkit-box-shadow: inset 0 0 5px lightgray;
+            box-shadow:         inset 0 0 5px lightgray;
+            /* width:80%; */
+            height:25px;
+            line-height: 25px;
+            padding:2px;
+            font-size: 12px;
+            margin-bottom: 4px;
+
+        }
+        .texlable{
+            font-size:13px;
+
+        }
+
+
+        </style>
+    </head>
+    <body>
+        <div id="main">
+            <section id="left-menu">
+            <center><h4>Map PolyGon</h4></center>
+            <div id="flip1">
+                    <div id="panel1"> 
+                        <span class="texlable">strokeColor</span>
+                        <input type="text" id="polygon_strokecolor" value="#FF0000" placeholder="Enter strokeColor" class="form-control b-shadow">
+                        <span class="texlable">strokeOpacity</span>
+                        <input type="text" id="polygon_strokeopacity" value="0.8" placeholder="Enter strokeOpacity" class="form-control b-shadow">
+                        <span class="texlable">strokeWeight</span>
+                        <input type="text" id="polygon_strokeweight" value="2" placeholder="Enter strokeWeight" class="form-control b-shadow">
+                        <span class="texlable">Fillcolor</span>
+                        <input type="text" id="polygon_fillcolor" value="#FF0000" placeholder="Enter Fillcolor" class="form-control b-shadow">
+                        <span class="texlable">Fillopacity</span>
+                        <input type="text" id="polygon_fillopacity" value="0.8" placeholder="Enter Fillopacity" class="form-control b-shadow">
+                        <span class="texlable">Position</span>
+                        <textarea name="label" id="polygon_position" rows="10" class="form-control">
+                                [ {"lat": "28.55101","lng":"77.26872"},{"lat":"28.55099","lng":"77.26849"},{"lat":"28.55097","lng":"77.26831"},
+                                {"lat":"28.55093","lng":"77.26794"},{"lat":"28.55089","lng":"77.2676"},{"lat":"28.55123","lng":"77.26756"},
+                                {"lat":"28.55145","lng":"77.26758"},{"lat":"28.55168","lng":"77.26758"},{"lat":"28.55172","lng":"77.26759"} ]
+                        </textarea>
+                        <span class="texlable"><b>Polygon Events</b></span>
+                        <select name="label" id="polygon_events" class="form-control b-shadow">
+                            <option disabled>Select</option>
+                            <option value="click" selected>click</option>
+                            <option value="dblclick">dblclick</option>
+                            <option value="drag">drag</option>
+                            <option value="dragend">dragend</option>
+                            <option value="dragstart">dragstart</option>
+                            <option value="mouseover">mouseover</option>
+                        </select>
+                        <div id="ch15" style="width:30%; height:40px;  display: inline-block; margin-top: 2%;">
+                            <label class="switch">
+                                <input id="checkbox" type="checkbox" Unchecked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- <hr> -->
+            </section>
+            <section id="right-menu"></section>
+        </div>
+
+        <!-- All Globle veriables -->
+    <script>
+            var map1;
+            var mapmyindia_polygon;
+            var center = "28.5507160000001,77.2689280000001";
+            var center = center.split(",");
+            var lat = center[0];var lng=center[1];
+
+            
+
+            // Draw Polygon
+            document.getElementById('checkbox').addEventListener('change', (event) => {
+                if (event.target.checked) { 
+                    // polugon function call
+                    polygon();
+                }   
+                else{
+                    map1.setZoom(4);
+                    MapmyIndia.remove({map:map1,layer:mapmyindia_polygon});
+                    map1.setCenter({lat: lat, lng: lng});
+                }
+            });
+
+            // Map Function
+            function initMap1() {
+                var center = {lat: lat, lng: lng};
+                map1 = new MapmyIndia.Map(document.getElementById('right-menu'), 
+                {
+                    center: center,
+                    zoomControl: true,
+                    location: true,
+                });
+            }
+            
+            // polygon function
+            function polygon(){
+                var polygon_strokecolor= document.getElementById('polygon_strokecolor').value;
+                var polygon_strokeopacity= document.getElementById('polygon_strokeopacity').value;
+                var polygon_strokeweight= document.getElementById('polygon_strokeweight').value;
+                var polygon_position= document.getElementById('polygon_position').value;
+                var polygon_events= document.getElementById('polygon_events').value;
+                var polygon_fillcolor= document.getElementById('polygon_fillcolor').value;
+                var polygon_fillopacity= document.getElementById('polygon_fillopacity').value;
+
+                // Polygon
+                mapmyindia_polygon = new MapmyIndia.Polygon({
+                    map:map1,
+                    paths: JSON.parse(polygon_position),
+                    fillColor: polygon_fillcolor,
+                    fillOpacity: JSON.parse(polygon_fillopacity),
+                    strokeColor: polygon_strokecolor,
+                    strokeOpacity:JSON.parse(polygon_strokeopacity),
+                    strokeWeight: JSON.parse(polygon_strokeweight),
+                    fitbounds:true,
+                    fitboundOptions:{padding: 120,duration:1000},
+                    popupHtml:'Route 1',
+                    popupOptions:{offset: {'bottom': [0, -20]}}
+                });
+                
+                // Polygon Events;
+                mapmyindia_polygon.addListener(polygon_events, function() {
+                    alert(`${polygon_events} Polygon Event Works`);
+                });
+            }
+        </script>
+    </body>
+</html>

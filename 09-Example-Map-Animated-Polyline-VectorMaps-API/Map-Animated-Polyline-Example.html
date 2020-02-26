@@ -1,0 +1,271 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://apis.mapmyindia.com/advancedmaps/api/<Token or Key>/map_sdk?layer=vector&v=2.0&callback=initMap1" defer async></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+
+        </title>
+        <style>
+        #main{
+            width: 100%;
+            height: 100%;
+            background-color: gray;
+        }
+        #left-menu{
+            width: 230px;
+            height: 100%;
+            background-color:  #e0e0e0;
+            float: left;
+            overflow: auto;
+        }
+        #right-menu{
+            width: calc(100% - 230px);
+            height: 100vh;
+            float: left;
+        }
+        /* Switch checkbox */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 55px;
+            height: 28px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        @media only screen and (max-width: 600px) {
+            #left-menu {
+                -webkit-transition: height 0.2s;
+                transition: height 0.2s;
+                width: 100%;
+                height: 30%;
+                background-color:  #e0e0e0;
+                position: absolute;
+                bottom: 0%;
+                z-index: 2;
+                overflow: auto;
+            }
+            #right-menu{
+                width: 100%;
+                height: 70%;
+                position: absolute;
+                z-index: 1;
+            }
+            
+        }
+
+        #flip1
+        {
+            color: #3c3c3c;
+            font-size: 20px;
+            background-color: #f3f3f3;
+            padding: 6px 0px;
+            margin-bottom: 3px;
+            margin-left: 6px;
+            margin-right: 6px;
+            border-radius: 6px;	
+        
+        }
+        #panel1{
+            padding:5px 10px 0px;
+            display: block;
+        }
+
+        ::-webkit-scrollbar {
+        width: 5px;
+        display: none;
+        }
+        .b-shadow {
+            -moz-box-shadow:    inset 0 0 5px lightgray;
+            -webkit-box-shadow: inset 0 0 5px lightgray;
+            box-shadow:         inset 0 0 5px lightgray;
+            /* width:80%; */
+            height:25px;
+            line-height: 25px;
+            padding:2px;
+            font-size: 12px;
+            margin-bottom: 4px;
+
+        }
+        .texlable{
+            font-size:13px;
+
+        }
+
+
+        </style>
+    </head>
+    <body>
+        <div id="main">
+            <section id="left-menu">
+            <center><h4>Animated PolyLine</h4></center>
+                <!-- Draw PolyLine -->
+                <div id="flip1">
+                    <div id="panel1">
+                        <span class="texlable">Path</span>       
+                        <select name="label" id="path_option" class="form-control b-shadow">
+                            <option disabled>Select</option>
+                            <option value="true" selected>True</option>
+                            <option value="false">False</option>
+                        </select>            
+                        <span class="texlable">Speed</span>
+                        <input type="text" id="speed" value="10" placeholder="Enter Speed" class="form-control b-shadow">
+                        <span class="texlable">strokeColor</span>
+                        <input type="text" id="strokecolor" value="blue" placeholder="Enter strokeColor" class="form-control b-shadow">
+                        <span class="texlable">strokeOpacity</span>
+                        <input type="text" id="strokeopacity" value="1.0" placeholder="Enter strokeOpacity" class="form-control b-shadow">
+                        <span class="texlable">strokeWeight</span>
+                        <input type="text" id="strokeweight" value="9" placeholder="Enter strokeWeight" class="form-control b-shadow">
+                        <span class="texlable">lineGap</span>
+                        <input type="text" id="linegap" value="0" placeholder="Enter lineGap" class="form-control b-shadow">
+                        <span class="texlable">PopupHtml</span>
+                        <input type="text" id="poly_popuphtml" value="Route 1" placeholder="Enter popuphtml" class="form-control b-shadow">
+                        <span class="texlable">Fitbound</span>
+                        <select name="label" id="poly_fitbounds" class="form-control b-shadow">
+                            <option disabled>Select</option>
+                            <option value="true" selected>True</option>
+                            <option value="false">False</option>
+                        </select> 
+                        <span class="texlable">Path</span>
+                        <textarea name="label" id="poly_position" rows="5" class="form-control">
+                                [{lat:28.55108, lng:77.26913},{lat:28.55106,lng: 77.26906},{lat:28.55105,lng: 77.26897},{lat:28.55101,lng:77.26872},{lat:28.55099, lng:77.26849},{lat:28.55097, lng:77.26831},{lat:28.55093, lng:77.26794},{lat:28.55089, lng:77.2676},{lat:28.55123, lng:77.26756},{lat:28.55145, lng:77.26758},{lat:28.55168, lng:77.26758},{lat:28.55175, lng:77.26759},{lat:28.55177, lng:77.26755},{lat:28.55179, lng:77.26753},{lat:28.55182, lng:77.26751},{lat:28.55185, lng:77.2675},{lat:28.5519, lng:77.2675},{lat:28.55193, lng:77.2675},{lat:28.55195, lng:77.26752},{lat:28.55199, lng:77.26756},{lat:28.55205, lng:77.26758},{lat:28.55212, lng:77.26758},{lat:28.55317, lng:77.26751},{lat:28.55368, lng:77.26748},{lat:28.554, lng:77.26747},{lat:28.55406, lng:77.26748},{lat:28.5541, lng:77.26749},{lat:28.55414, lng:77.26752},{lat:28.55418, lng:77.26755},{lat:28.55427, lng:77.26764},{lat:28.55432, lng:77.26769},{lat:28.55437, lng:77.26773},{lat:28.55443, lng:77.26773},{lat:28.55454, lng:77.26775},{lat:28.5546, lng:77.26773},{lat:28.55505, lng:77.26732},{lat:28.55511, lng:77.26727},{lat:28.55545, lng:77.26705},{lat:28.55527, lng:77.26668},{lat:28.55509, lng:77.26635},{lat:28.55496, lng:77.26611},{lat:28.55478, lng:77.26582},{lat:28.55462, lng:77.26559},{lat:28.55453, lng:77.2655},{lat:28.55437, lng:77.26539},{lat:28.55413, lng:77.26525},{lat:28.5539, lng:77.26514},{lat:28.55313, lng:77.26481},{lat:28.55292, lng:77.26472},{lat:28.5527, lng:77.26463},{lat:28.55241, lng:77.26452},{lat:28.5521, lng:77.26441},{lat:28.55188, lng:77.26432},{lat:28.55154, lng:77.2642},{lat:28.55071, lng:77.26388},{lat:28.55042, lng:77.26374},{lat:28.55024, lng:77.26364},{lat:28.55, lng:77.26345},{lat:28.54984,lng: 77.26331},{lat:28.54978, lng:77.26324},{lat:28.54963, lng:77.26305},{lat:28.54955,lng:77.26293},{lat:28.54951, lng:77.26287},{lat:28.54943, lng:77.26269},{lat:28.54936, lng:77.26253},{lat:28.54932, lng:77.2624},{lat:28.5493, lng:77.26232},{lat:28.54928, lng:77.26226},{lat:28.54915, lng:77.26172},{lat:28.54883, lng:77.26038},{lat:28.54877, lng:77.26011},{lat:28.54875, lng:77.25953}]
+                        </textarea>
+                        <span class="texlable"><b>Animated PolyLine Events</b></span>
+                        <select name="label" id="polyline_events" class="form-control b-shadow">
+                            <option disabled>Select</option>
+                            <option value="click" selected>click</option>
+                            <option value="dblclick">dblclick</option>
+                            <option value="drag">drag</option>
+                            <option value="dragend">dragend</option>
+                            <option value="dragstart">dragstart</option>
+                            <option value="mouseover">mouseover</option>
+                        </select>
+                        <div id="ch14" style="width:30%; height:40px;  display: inline-block; margin-top: 2%;">
+                            <label class="switch">
+                                <input id="checkbox" type="checkbox" Unchecked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            <!-- <hr> -->
+            </section>
+            <section id="right-menu"></section>
+        </div>
+
+        <!-- All Globle veriables -->
+    <script>
+            var map1;
+            var center = "28.5507160000001,77.2689280000001";
+            var center = center.split(",");
+            var lat = center[0];var lng=center[1];
+            var pl;
+            // Draw Animated Polyline
+            document.getElementById('checkbox').addEventListener('change', (event) => {
+                if (event.target.checked) {
+                    // call Animated polyline function
+                    animated_polyline();
+                } 
+                else {
+                    map1.setZoom(4);
+                    MapmyIndia.remove({map:map1,layer:pl});
+                    map1.setCenter({lat: lat, lng: lng});
+                }
+            });
+
+            // Map Function
+            function initMap1() {
+                var center = {lat: lat, lng: lng};
+                map1 = new MapmyIndia.Map(document.getElementById('right-menu'), 
+                {
+                    center: center,
+                    zoomControl: true,
+                    location: true,
+                });
+            }
+            // Animated polyline function
+            function animated_polyline(){
+                var strokecolor=  document.getElementById('strokecolor').value;
+                var strokeopacity=  document.getElementById('strokeopacity').value;
+                var strokeweight=  document.getElementById('strokeweight').value;
+                var poly_position=  document.getElementById('poly_position').value;
+                var polyline_events=  document.getElementById('polyline_events').value;
+                var linegap=  document.getElementById('linegap').value;
+                var poly_fitbounds=  document.getElementById('poly_fitbounds').value;
+                var poly_popuphtml =  document.getElementById('poly_popuphtml').value;
+                var path_option = document.getElementById('path_option').value;
+                var speed = document.getElementById('speed').value;
+
+                pl = new MapmyIndia.Polyline({
+                    map:map1,
+                    path: eval(poly_position),
+                    animate:{
+                        path:JSON.parse(path_option),
+                        speed:JSON.parse(speed),
+                    },
+                    strokeColor: strokecolor,
+                    strokeOpacity: JSON.parse(strokeopacity),
+                    strokeWeight: JSON.parse(strokeweight),
+                    fitbounds:JSON.parse(poly_fitbounds),
+                    lineGap:JSON.parse(linegap),
+                    fitboundOptions:{padding: 120,duration:1000},
+                    popupHtml:poly_popuphtml,
+                    popupOptions:{offset: {'bottom': [0, -20]}}
+                }); 
+                // Animated Polyline Events
+                pl.addListener(polyline_events, function() {
+                    alert(polyline_events + ' event works on gradient Polyline');
+                });
+            }
+        </script>
+    </body>
+</html>

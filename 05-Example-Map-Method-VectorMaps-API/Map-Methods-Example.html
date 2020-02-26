@@ -1,0 +1,479 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://apis.mapmyindia.com/advancedmaps/api/<Token or Key>/map_sdk?layer=vector&v=2.0&callback=initMap1" defer async></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+
+        </title>
+        <style>
+        #main{
+            width: 100%;
+            height: 100%;
+            background-color: gray;
+        }
+        #left-menu{
+            width: 230px;
+            height: 100%;
+            background-color:  #e0e0e0;
+            float: left;
+            overflow: auto;
+        }
+        #right-menu{
+            width: calc(100% - 230px);
+            height: 100vh;
+            float: left;
+        }
+        /* Switch checkbox */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 55px;
+            height: 28px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        @media only screen and (max-width: 600px) {
+            #left-menu {
+                -webkit-transition: height 0.2s;
+                transition: height 0.2s;
+                width: 100%;
+                height: 30%;
+                background-color:  #e0e0e0;
+                position: absolute;
+                bottom: 0%;
+                z-index: 2;
+                overflow: auto;
+            }
+            #right-menu{
+                width: 100%;
+                height: 70%;
+                position: absolute;
+                z-index: 1;
+            }
+            
+        }
+
+        #flip1
+        {
+            color: #3c3c3c;
+            font-size: 20px;
+            background-color: #f3f3f3;
+            padding: 6px 0px;
+            margin-bottom: 3px;
+            margin-left: 6px;
+            margin-right: 6px;
+            border-radius: 6px;	
+        
+        }
+        #panel1{
+            padding:5px 10px 0px;
+            display: block;
+        }
+
+        ::-webkit-scrollbar {
+        width: 5px;
+        display: none;
+        }
+        .b-shadow {
+            -moz-box-shadow:    inset 0 0 5px lightgray;
+            -webkit-box-shadow: inset 0 0 5px lightgray;
+            box-shadow:         inset 0 0 5px lightgray;
+            /* width:80%; */
+            height:25px;
+            line-height: 25px;
+            padding:2px;
+            font-size: 12px;
+            margin-bottom: 4px;
+
+        }
+        .texlable{
+            font-size:13px;
+
+        }
+
+
+        </style>
+    </head>
+    <body>
+        <div id="main">
+            <section id="left-menu">
+            <center><h4>Map Method</h4></center>
+                <!-- Map Methods -->
+                <div id="flip1">
+                    <div id="panel1">
+                        <table width="100%">
+                            <tr>
+                                <td><span class="texlable">getcenter()</span></td>
+                                <td>
+                                    <div id="ch1" style="width:100%; height:40px;  display: inline-block;">
+                                        <label class="switch">
+                                            <input id="checkbox1" type="checkbox" Unchecked >
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> <span class="texlable">getHeading()</span></td>
+                                <td>
+                                    <div id="ch2" style="width:100%; height:40px;  display: inline-block;">
+                                        <label class="switch">
+                                            <input id="checkbox2" type="checkbox" Unchecked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="texlable">getDiv()</span></td>
+                                <td>
+                                    <div id="ch3" style="width:100%; height:40px;  display: inline-block;">
+                                        <label class="switch">
+                                            <input id="checkbox3" type="checkbox" Unchecked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="texlable">getZoom()</span></td>
+                                <td>
+                                    <div id="ch4" style="width:100%; height:40px;  display: inline-block;">
+                                        <label class="switch">
+                                            <input id="checkbox4" type="checkbox" Unchecked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="texlable">getBounds()</span></td>
+                                <td>
+                                    <div id="ch5" style="width:100%; height:40px;  display: inline-block;">
+                                        <label class="switch">
+                                            <input id="checkbox5" type="checkbox" Unchecked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>        
+                            <tr>
+                                <tr><td><span class="texlable">panTo()</span></td></tr>
+                                <td>
+                                    <input type="text" id="panto" value="28.5454,78.545454" placeholder="Enter Latlng for panTo" class="form-control b-shadow">
+                                </td>
+                                <td>
+                                    <div id="ch6" style="width:100%; height:40px;  display: inline-block;">
+                                        <label class="switch">
+                                            <input id="checkbox6" type="checkbox" Unchecked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <tr><td><span class="texlable">setHeading()</span></td></tr>
+                                <td>
+                                    <input type="text" id="setheading" value="100" placeholder="EntersetHeading" class="form-control b-shadow">
+                                </td>
+                                <td>
+                                    <div id="ch7" style="width:100%; height:40px;  display: inline-block;">
+                                        <label class="switch">
+                                            <input id="checkbox7" type="checkbox" Unchecked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <tr><td><span class="texlable">setcenter()</span></td></tr>
+                                <td>
+                                    <input type="text" id="setcenter" value="22.572645,88.363892" placeholder="Set Center" class="form-control b-shadow">
+                                </td>
+                                <td>
+                                    <div id="ch8" style="width:100%; height:40px;  display: inline-block;">
+                                        <label class="switch">
+                                            <input id="checkbox8" type="checkbox" Unchecked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <tr><td><span>setZoom()</span></td></tr>
+                                <td>
+                                    <input type="text" id="setzoom" value="16" placeholder="Enter setHeading" class="form-control b-shadow">
+                                </td>
+                                <td>
+                                    <div id="ch9" style="width:100%; height:40px;  display: inline-block;">
+                                        <label class="switch">
+                                            <input id="checkbox9" type="checkbox" Unchecked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <tr><td><span>setTilt()</span></td></tr>
+                                <td>
+                                    <input type="text" id="settilt" value="30" placeholder="Enter setTilt" class="form-control b-shadow">
+                                </td>
+                                <td>
+                                    <div id="ch10" style="width:100%; height:40px;  display: inline-block;">
+                                        <label class="switch">
+                                            <input id="checkbox10" type="checkbox" Unchecked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>getTilt()</span></td>
+                                <td>
+                                    <div id="ch11" style="width:100%; height:40px;  display: inline-block;">
+                                        <label class="switch">
+                                            <input id="checkbox11" type="checkbox" Unchecked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>    
+                        <hr />
+                        Result  :-
+                        <div id="mapmyindia_result" class="texlable"> </div>              
+                    </div>
+                </div>
+                <!-- <hr> -->
+            </section>
+            <section id="right-menu"></section>
+        </div>
+
+        <!-- All Globle veriables -->
+    <script>
+            var map1;
+            var center = "28.5507160000001,77.2689280000001";
+            var center = center.split(",");
+            var lat = center[0];var lng=center[1];
+            // PanTo() latlng Value
+            var panto = document.getElementById('panto').value;
+            var panto = panto.split(",");
+            var panlat = panto[0];var panlng=panto[1];
+            //setHeading Value
+            var setheading = document.getElementById('setheading').value;
+            // setCenter() latlng Value
+            var setcenter = document.getElementById('setcenter').value;
+            var setcenter = setcenter.split(",");
+            var setcenterlat = setcenter[0];var setcenterlng=setcenter[1];
+            // setZoom Value
+            var setzoom = document.getElementById('setzoom').value;
+            // setTilt  value
+            var settilt = document.getElementById('settilt').value;
+
+
+            // getcenter() Method
+            document.getElementById('checkbox1').addEventListener('change', (event) => {
+                if (event.target.checked) {
+                    document.getElementById('mapmyindia_result').style.display='block';
+                    document.getElementById("mapmyindia_result").innerHTML = map1.getCenter(); 
+                    setTimeout(function(){  document.getElementById("checkbox1").checked = false; }, 2000);
+                } 
+                else {
+                    document.getElementById('mapmyindia_result').style.display='none';
+                }
+            });
+
+            // getHeading() Method
+            document.getElementById('checkbox2').addEventListener('change', (event) => {
+                if (event.target.checked) {
+                    document.getElementById('mapmyindia_result').style.display='block';
+                    document.getElementById("mapmyindia_result").innerHTML = map1.getHeading(); 
+                    setTimeout(function(){  document.getElementById("checkbox2").checked = false; }, 2000);
+                } 
+                else {
+                    document.getElementById('mapmyindia_result').style.display='none';
+                }
+            });
+
+            // getDiv() Method
+            document.getElementById('checkbox3').addEventListener('change', (event) => {
+                if (event.target.checked) {
+                    document.getElementById('mapmyindia_result').style.display='block';
+                    document.getElementById("mapmyindia_result").innerHTML = "Look at console";
+                    console.log(map1.getDiv());
+                    setTimeout(function(){  document.getElementById("checkbox3").checked = false; }, 2000);
+                } 
+                else {
+                    document.getElementById('mapmyindia_result').style.display='none';
+                }
+            });
+            
+            // getZoom() Method
+            document.getElementById('checkbox4').addEventListener('change', (event) => {
+                if (event.target.checked) {
+                    document.getElementById('mapmyindia_result').style.display='block';
+                    document.getElementById("mapmyindia_result").innerHTML = map1.getZoom(); 
+                    setTimeout(function(){  document.getElementById("checkbox4").checked = false; }, 2000);   
+                } 
+                else {
+                    document.getElementById('mapmyindia_result').style.display='none';
+                }
+            });
+
+            // getBounds() Method
+            document.getElementById('checkbox5').addEventListener('change', (event) => {
+                if (event.target.checked) {
+                    document.getElementById('mapmyindia_result').style.display='block';
+                    document.getElementById("mapmyindia_result").innerHTML = map1.getBounds();
+                    setTimeout(function(){  document.getElementById("checkbox5").checked = false; }, 2000);   
+                } 
+                else {
+                    document.getElementById('mapmyindia_result').style.display='none';
+                }
+            });
+            
+            // panTo() Method
+            document.getElementById('checkbox6').addEventListener('change', (event) => {
+                if (event.target.checked) {
+                    panto = document.getElementById('panto').value;
+                    panto = panto.split(",");
+                    panlat = panto[0];var panlng=panto[1];
+                    map1.panTo({lat:panlat,lng:panlng});
+                    setTimeout(function(){  document.getElementById("checkbox6").checked = false; }, 2000);
+                } 
+                else {
+                    map1.setCenter({lat: lat, lng: lng});
+                }
+            });
+
+            // setHeading() Method
+            document.getElementById('checkbox7').addEventListener('change', (event) => {
+                if (event.target.checked) {
+                    setheading = document.getElementById('setheading').value;
+                    map1.setHeading(setheading);
+                    setTimeout(function(){  document.getElementById("checkbox7").checked = false; }, 2000);
+                } 
+                else {
+                    map1.setHeading(0);
+                    map1.setCenter({lat: lat, lng: lng});
+                }
+            });
+
+            
+            // setCeneter() Method
+            document.getElementById('checkbox8').addEventListener('change', (event) => {
+                if (event.target.checked) {
+                    setcenter = document.getElementById('setcenter').value;
+                    setcenter = setcenter.split(",");
+                    setcenterlat = setcenter[0]; 
+                    setcenterlng = setcenter[1];
+                    map1.setCenter({lat:setcenterlat,lng:setcenterlng});
+                    setTimeout(function(){  document.getElementById("checkbox8").checked = false; }, 2000);
+                } 
+                else {
+                    map1.setCenter({lat: lat, lng: lng});
+                }
+            });
+            
+            // setZoom() Method
+            document.getElementById('checkbox9').addEventListener('change', (event) => {
+                if (event.target.checked) {
+                    setzoom = document.getElementById('setzoom').value;
+                    map1.setZoom(setzoom);
+                    setTimeout(function(){  document.getElementById("checkbox9").checked = false; }, 2000);
+                } 
+                else {
+                    map1.setZoom(10);
+                    map1.setCenter({lat: lat, lng: lng});
+                }
+            });
+
+            // setTilt() Method
+            document.getElementById('checkbox10').addEventListener('change', (event) => {
+                if (event.target.checked) {
+                    settilt = document.getElementById('settilt').value;
+                    map1.setTilt(settilt);
+                    setTimeout(function(){  document.getElementById("checkbox10").checked = false; }, 2000);
+                } 
+                else {
+                    map1.setTilt(0);
+                    map1.setCenter({lat: lat, lng: lng});
+                }
+            });
+
+            // getTilt() Method
+            document.getElementById('checkbox11').addEventListener('change', (event) => {
+                if (event.target.checked) {
+                    document.getElementById('mapmyindia_result').style.display='block';
+                    document.getElementById("mapmyindia_result").innerHTML = map1.getTilt();
+                    setTimeout(function(){  document.getElementById("checkbox11").checked = false; }, 2000);
+                } 
+                else {
+                    document.getElementById('mapmyindia_result').style.display='none';
+                }
+            });
+
+            // Map Function
+            var map1;
+                function initMap1() {
+                    var center = {lat: lat, lng: lng};
+                    map1 = new MapmyIndia.Map(document.getElementById('right-menu'), 
+                    {
+                        center: center,
+                        zoomControl: true,
+                        location: true,
+                    });
+                }
+        </script>
+    </body>
+</html>
