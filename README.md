@@ -128,7 +128,7 @@ Now, that you have a basic understanding of Markers, Functions and Events let’
 
 ### Adding Your First Marker
 
-[LIVE DEMO](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/single-marker) 
+[LIVE DEMO](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/single-marker) | [JS Fiddle](https://jsfiddle.net/mapmyindia_map/7uyafxjn/)
 
 The easiest way to start loading maps with simple markers in a web page is with a “Hello World” sample code, you can download or view a working “Hello World” sample from the links above. 
   
@@ -188,8 +188,6 @@ var marker = new MapmyIndia.Marker({
 
 ### Knowing Properties And Methods
 
-[JSFIDDLE]()  |  [LIVE DEMO]()
-
 You can interact with properties of the Map we provide to suite your use case and add additional customizability to your Map layer using the features it has to offer. These functions are a quick go to in case of an event. 
 
 For details on Map Methods, please read article in [wiki](https://github.com/MapmyIndia/MapmyIndia-Interactive-Vector-Maps-JS-SDK/wiki/mapMethods)
@@ -232,7 +230,7 @@ For details on Map Methods, please read article in [wiki](https://github.com/Map
 
 ### Info Windows
 
-[LIVE DEMO](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/infowindow)
+[LIVE DEMO](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/infowindow) | [JS Fiddle](https://jsfiddle.net/mapmyindia_map/wcto9g0n/)
 
 Info Windows are a convenient way of showing data about a marker or in simple words: what that marker stands for. The Native behaviour of a user to know about any marker is to try and click on it to know what it’s all about and showing an info window would be the way to go about it:
 
@@ -289,7 +287,7 @@ For details on Info Windows, please read article in [wiki](https://github.com/Ma
 
 ### Polylines
 
-[LIVE DEMO](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/polyline)
+[LIVE DEMO](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/polyline) | [JS Fiddle](https://jsfiddle.net/mapmyindia_map/15faq7j2/)
 
 Polylines are a way of showing movement or transit on a map. We at MapmyIndia understand the ways you can leverage the features offered by a map and one among them is a Polyline.
 
@@ -403,7 +401,7 @@ For details on Polygons, please read article in [wiki](https://github.com/MapmyI
 
 **Simple Polygon**
 
-[LIVE DEMO](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/polygon)
+[LIVE DEMO](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/polygon) | [JS Fiddle](https://jsfiddle.net/mapmyindia_map/tmyexuz0/)
 
 ## Example
 
@@ -486,7 +484,7 @@ For details on Circles, please read article in [wiki](https://github.com/MapmyIn
     MapmyIndia.Circle()
 ```
 
-[LIVE DEMO](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/circle)
+[LIVE DEMO](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/circle) | [JS Fiddle](https://jsfiddle.net/mapmyindia_map/24pgv9qw/)
 
 ## Example
 
@@ -591,7 +589,7 @@ For details on Heatmap Overlays, please read article in [wiki](https://github.co
 
 For details on GeoJSON layer, please read article in [wiki](https://github.com/MapmyIndia/MapmyIndia-Interactive-Vector-Maps-JS-SDK/wiki/geoJson)
 
-[Live Demo](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/addgeojson)
+[Live Demo](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/addgeojson) | [JS Fiddle](https://jsfiddle.net/mapmyindia_map/19hotbck/)
 
 *GeoJSON Supports marker, polyline and polygon*
 
@@ -753,7 +751,7 @@ For details on GeoJSON layer, please read article in [wiki](https://github.com/M
 **KML**: [Keyhole Markup Language](https://www.opengeospatial.org/standards/kml) is a file format used to display geographic data on maps.
 Using this plugin, you can overlay KML data over MapmyIndia Maps for web.
 
-[LIVE DEMO](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/kml)
+[LIVE DEMO](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/kml) | [JS Fiddle](https://jsfiddle.net/mapmyindia_map/7zabxp3d/)
 
 #### Important Notes to remember
 1. Only KML data supported.
