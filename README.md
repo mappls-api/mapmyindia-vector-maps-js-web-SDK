@@ -33,7 +33,7 @@ Now that you’re all caught up with the features let’s get down right to them
 
 ### Initializing The Map
 
-[Live Demo](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/mapInitialization)[JS Fiddle](https://jsfiddle.net/mapmyindia_map/7fqyshoc/)
+[Live Demo](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/mapInitialization) | [JS Fiddle](https://jsfiddle.net/mapmyindia_map/7fqyshoc/)
 
 The easiest way to start loading maps in a web page is with a “Hello World” sample code, you can download or view a working “Hello World” sample from the links for adding your first marker below.
 
