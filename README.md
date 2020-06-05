@@ -542,7 +542,7 @@ For details on Heatmap Overlays, please read article in [wiki](https://github.co
 
 - [**Heatmap Properties**](https://github.com/MapmyIndia/MapmyIndia-Interactive-Vector-Maps-JS-SDK/wiki/heatMap#Heatmap-Properties)
 
-[LIVE DEMO](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/heatmaplayer)
+[LIVE DEMO](https://www.mapmyindia.com/api/advanced-maps/WebSDK-LiveDemo/heatmaplayer) | [JS Fiddle](https://jsfiddle.net/mapmyindia_map/evhgxs4r/)
 
 ## Example
 
@@ -821,7 +821,7 @@ ie.
 
 For any queries and support, please contact: 
 
-![Email](https://www.google.com/a/cpanel/mapmyindia.co.in/images/logo.gif?service=google_gsuite) 
+[<img src="https://www.mapmyindia.com/images/logo.png" height="40"/> </p>](https://www.mapmyindia.com/api)
 
 Email us at [apisupport@mapmyindia.com](mailto:apisupport@mapmyindia.com)
 
