@@ -825,6 +825,12 @@ ie.
 
 **Please Note**: For a more detailed code snippet follow the links provided above to see the sample code or see a live demo.
 
+
+## For further documentation updates, Kindly refer to documentation available on [github.com/mappls-api](https://github.com/mappls-api/mapmyindia-vector-maps-js-web-SDK)
+
+<br>
+
+
 For any queries and support, please contact: 
 
 [<img src="https://www.mapmyindia.com/images/logo.png" height="40"/> </p>](https://www.mapmyindia.com/api)
