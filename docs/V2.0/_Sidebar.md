@@ -1,0 +1,24 @@
+- [Table of Contents](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki)
+    - Map Methods & Events
+        - [Map Properties](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/mapProperties)
+        - [Map Methods](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/mapMethods)
+        - [Map Events](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/mapEvents)        
+    
+    - [Set MapmyIndia Style](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/Set-MapmyIndia-Style)
+        - [List of styles](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/Set-MapmyIndia-Style#list-of-available-styles)
+        - [set styles](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/Set-MapmyIndia-Style#Set-MapmyIndia-Styles)
+    - Drawables on the Map
+        - [Markers](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/markers)
+            - [Marker Properties](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/markerProperties)
+            - [Marker Methods](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/markerMethods)
+            - [Marker Events](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/markerEvents)
+        - [Info Windows](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/infoWindows)        
+        - [Polylines](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/polyline)
+        - [Polygon](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/polygon)
+        - [Circles](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/circle)
+    - Overlays
+        - [GeoJSON](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/geoJson)
+        - [HeatMap](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/heatMap)
+        - [KML](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/kml)
+    - External Source Overlays
+        - [RasterSource](https://github.com/MapmyIndia/mapmyindia-vector-maps-js-web-SDK/wiki/RasterSource)
