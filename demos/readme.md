@@ -43,7 +43,8 @@ The map object is the map on your page. It lets you access methods and propertie
 # Markers
 This section describes the user interface elements - Markers that you can add to your map. Point to any location using default pushpin behaviors and provide it your own style to make it look more tailored for your application.
 
-- [Advance Cluster Marker](https://about.mappls.com/api/web-sdk/vector-map-example/Markers/mappls-advancecluster)
+- [Single Marker](https://about.mappls.com/api/web-sdk/vector-map-example/Markers/mappls-singlemarker)
+- [Multiple Marker](https://about.mappls.com/api/web-sdk/vector-map-example/Markers/mappls-multiplemarker)
 - [Bouncing Marker](https://about.mappls.com/api/web-sdk/vector-map-example/Markers/mappls-bouncing-marker)
 - [Cluster Marker](https://about.mappls.com/api/web-sdk/vector-map-example/Markers/mappls-cluster)
 - [Dragable Marker](https://about.mappls.com/api/web-sdk/vector-map-example/Markers/mappls-draggablemarker)
@@ -53,9 +54,8 @@ This section describes the user interface elements - Markers that you can add to
 - [Linked Marker](https://about.mappls.com/api/web-sdk/vector-map-example/Markers/mappls-linked-marker)
 - [Marker with Custom Popup](https://about.mappls.com/api/web-sdk/vector-map-example/Markers/mappls-marker-custompopup)
 - [Marker with Popup](https://about.mappls.com/api/web-sdk/vector-map-example/Markers/mappls-markerpopup)
+- [Advance Cluster Marker](https://about.mappls.com/api/web-sdk/vector-map-example/Markers/mappls-advancecluster)
 
-- [Multiple Marker](https://about.mappls.com/api/web-sdk/vector-map-example/Markers/mappls-multiplemarker)
-- [Single Marker](https://about.mappls.com/api/web-sdk/vector-map-example/Markers/mappls-singlemarker)
 
 # Polyline
 
