@@ -10,11 +10,12 @@ This page will be continually enhanced to offer more insights and reference mate
 
 You can get your api key to be used in this document here: [https://apis.mappls.com/console/](https://apis.mappls.com/console/)
 
+
 ## Documentation History
 
 | Version | Remarks | Author |
 |--|--|--|
-| 3.0 | Initial Commit  |Mappls API Team [MS](https://github.com/mamtasharma117)|
+| 3.0 | Initial Commit  |Mappls API Team ([MS](https://github.com/mamtasharma117))|
 
 ## Introduction
 The Interactive Maps JavaScript SDK for Web helps render and display map tiles while customizing the map's look and feel on mobile or web browser. Mappls (MapmyIndia) is India's leading Map provider, and produces various SDKs, including Web SDKs (JavaScript libraries) for mobile-friendly interactive maps which are easy to use & high on performance. 
@@ -28,7 +29,7 @@ This SDK is a collection of classes and functions that can be used to implement 
     -   **Info Windows (Pop-ups)**: On a Map Clicking is a native behavior understanding this, we provide out of the box info windows such that if a pushpin is clicked an info window pops up open and you can show your content related to that location there. You can style it to make it behave as required for your UI to be magnificent.
     -   **Polylines**: Connect any two points or even more with out of the box Mappls polylines dedicated to high customizability and performance to suit your use cases. Note: Have a look at the plug-ins we provide to make your polylines have an edge up and suit your use cases in a more integrated manner.
     -   **Polygons**: Show a region in a spotlight with a polygon and show various localized data based on it.
-    -   **Circles:** Show instant radial areas of inter
+    -   **Circles:** Circles are way of marking a territory without too much interaction by the user.You can draw a circle around a given location.
 -   **Controls**: because we understand the use cases with a map we provide the below out of the box controls that can be turned off or on based on your requirement and because we care, we provide you to override our controls outlook by providing your own styles or CSS so that you can move them or customize them completely. Controls include:
     -   **Zoom Bar**: (appears by default at the centre on the right side). Helps to provide zoom in and zoom out functionality to the map by default.
     -   **Map Layer Control**: Allows to change the map view from basic to hybrid and regional. Also allows to show traffic layer on map.
