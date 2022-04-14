@@ -129,6 +129,7 @@ This section helps you to display overlays on the map.
 For any queries and support, please contact: 
 
 ![Email](https://cdn.mapmyindia.com/mappls_web/maps_widget_v2/images/mappls.svg?service=google_gsuite) 
+
 Email us at [apisupport@mapmyindia.com](mailto:apisupport@mapmyindia.com)
 
 
