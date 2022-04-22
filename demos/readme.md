@@ -82,9 +82,7 @@ Show a region in a spotlight with a polygon and show various localized data base
 - [Editable Polygon](https://about.mappls.com/api/web-sdk/vector-map-example/Polygon/mappls-editable-polygon)
 - [Polygon with Popup](https://about.mappls.com/api/web-sdk/vector-map-example/Polygon/mappls-polygon-withpopup)
 - [Transparent Polygon](https://about.mappls.com/api/web-sdk/vector-map-example/Polygon/mappls-transparent-polygon)
-- [Check Position In Polygon](https://about.mappls.com/api/web-sdk/vector-map-example/Polygon/mappls-check-position-polygon)
-
-
+- [Check Position In Polygon(Geofence)](https://about.mappls.com/api/web-sdk/vector-map-example/Polygon/mappls-check-position-polygon)
 
 # InfoWindow
 
