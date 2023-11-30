@@ -1,3 +1,5 @@
+# DEPRECATED
+This repository is no longer in active development & use.
 
 ![Mappls APIs](https://about.mappls.com/images/mappls-b-logo.svg)
 # MapmyIndia Interactive Vector Maps JS SDK for Web !
